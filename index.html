@@ -412,5 +412,79 @@
   </div>
 </footer>
 
+
+
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ModCube – Interactive 3‑D model</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Safari needs this shim for import‑maps -->
+  <script async
+          src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
+
+  <!-- Tell every script that imports "three" to use the same CDN copy -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.min.js"
+    }
+  }
+  </script>
+
+  <!-- <model-viewer> without Three bundled -->
+  <script type="module"
+          src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js"></script>
+
+  <!-- Optional post‑processing add‑on -->
+  <script type="module"
+          src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script>
+
+  <style>
+    body{
+      margin:0;
+      font-family:system-ui,Arial,Helvetica,sans-serif;
+      background:#111;
+      display:grid;
+      place-items:center;
+      min-height:100vh;
+    }
+    model-viewer{
+      width:100%;
+      max-width:900px;
+      height:600px;
+      --progress-bar-color:#2ecc71; /* nice green loader */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== THE VIEWER ===================== -->
+  <model-viewer id="modcube"
+                src="./static/models/modcube.glb"   <!-- your GLB -->
+                ios-src="./static/models/modcube.usdz"  <!-- optional -->
+                alt="RS‑ModCube underwater robot"
+                camera-controls
+                auto-rotate
+                touch-action="pan-y"
+                ar
+                ar-modes="scene-viewer quick-look webxr"
+                ar-scale="fixed"
+                exposure="1.2">
+
+      <!-- Post‑processing: bloom + tonemapping -->
+      <effect-composer render-mode="quality" msaa="4">
+        <bloom-effect strength="0.7" radius="0.6" threshold="0.2"></bloom-effect>
+        <color-grade-effect></color-grade-effect>
+      </effect-composer>
+
+  </model-viewer>
+
+</body>
+
+
+
 </body>
 </html>
