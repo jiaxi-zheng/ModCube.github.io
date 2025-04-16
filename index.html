@@ -334,7 +334,8 @@
   camera.position.set(2, 2, 3);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(container.clientWidth, container.clientHeight);
+  // renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setSize(10, container.clientHeight);
   container.appendChild(renderer.domElement);
 
   /* Lighting */
@@ -351,7 +352,7 @@
   const loader = new ColladaLoader();
   loader.load('./static/model/modcube.dae', (collada) => {
       const model = collada.scene;
-      model.scale.set(1, 1, 1);     // resize if necessary
+      model.scale.set(0.5, 0.5, 0.5);     // resize if necessary
       scene.add(model);
       /* Optional: center the camera on the model */
       const box = new THREE.Box3().setFromObject(model);
