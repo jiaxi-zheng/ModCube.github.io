@@ -319,6 +319,65 @@
   </div>
 </section>
 
+<!-- <script type="module">
+  /* === Import Three.js (ES‑modules from jsDelivr CDN) === */
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+  import { OrbitControls }  from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+  import { ColladaLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/ColladaLoader.js';
+
+  /* ---------- Basic scene setup ---------- */
+  const container = document.getElementById('model-canvas');
+  const scene     = new THREE.Scene();
+  scene.background = new THREE.Color(0xffffff);
+
+  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+  camera.position.set(2, 2, 3);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  container.appendChild(renderer.domElement);
+
+  /* Lighting */
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.2));
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  dirLight.position.set(5, 10, 7);
+  scene.add(dirLight);
+
+  /* OrbitControls for drag‑to‑rotate */
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;  // smooth motion
+
+  /* ---------- Load the Collada model ---------- */
+  const loader = new ColladaLoader();
+  loader.load('./static/model/modcube.dae', (collada) => {
+      const model = collada.scene;
+      model.scale.set(1, 1, 1);     // resize if necessary
+      scene.add(model);
+      /* Optional: center the camera on the model */
+      const box = new THREE.Box3().setFromObject(model);
+      const size = box.getSize(new THREE.Vector3()).length();
+      const center = box.getCenter(new THREE.Vector3());
+      controls.target.copy(center);
+      camera.position.copy(center).add(new THREE.Vector3(size * 0.6, size * 0.6, size * 0.6));
+      controls.update();
+  });
+
+  /* ---------- Render loop ---------- */
+  function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+  }
+  animate();
+
+  /* ---------- Handle window resize ---------- */
+  window.addEventListener('resize', () => {
+      const { clientWidth:w, clientHeight:h } = container;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+  });
+</script> -->
 
 
 <footer class="footer">
@@ -352,6 +411,8 @@
     </div>
   </div>
 </footer>
+
+
 
 
 <head>
@@ -397,25 +458,30 @@
     }
   </style>
 </head>
-  <!-- ===================== THE VIEWER ===================== -->
-<model-viewer id="modcube"
-              src="./static/models/modcube.glb"   <!-- your GLB -->
-              ios-src="./static/models/modcube.usdz"  <!-- optional -->
-              alt="RS‑ModCube underwater robot"
-              camera-controls
-              auto-rotate
-              touch-action="pan-y"
-              ar
-              ar-modes="scene-viewer quick-look webxr"
-              ar-scale="fixed"
-              exposure="1.2">
+<body>
 
-    <!-- Post‑processing: bloom + tonemapping -->
-    <effect-composer render-mode="quality" msaa="4">
-      <bloom-effect strength="0.7" radius="0.6" threshold="0.2"></bloom-effect>
-      <color-grade-effect></color-grade-effect>
-    </effect-composer>
-</model-viewer>
+  <!-- ===================== THE VIEWER ===================== -->
+  <model-viewer id="modcube"
+                src="./static/models/modcube.glb"   <!-- your GLB -->
+                ios-src="./static/models/modcube.usdz"  <!-- optional -->
+                alt="RS‑ModCube underwater robot"
+                camera-controls
+                auto-rotate
+                touch-action="pan-y"
+                ar
+                ar-modes="scene-viewer quick-look webxr"
+                ar-scale="fixed"
+                exposure="1.2">
+
+      <!-- Post‑processing: bloom + tonemapping -->
+      <effect-composer render-mode="quality" msaa="4">
+        <bloom-effect strength="0.7" radius="0.6" threshold="0.2"></bloom-effect>
+        <color-grade-effect></color-grade-effect>
+      </effect-composer>
+
+  </model-viewer>
+
+</body>
 
 
 
