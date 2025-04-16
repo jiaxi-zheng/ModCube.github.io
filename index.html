@@ -319,7 +319,7 @@
   </div>
 </section>
 
-<!-- <script type="module">
+<script type="module">
   /* === Import Three.js (ES‑modules from jsDelivr CDN) === */
   import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
   import { OrbitControls }  from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
@@ -377,7 +377,7 @@
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
   });
-</script> -->
+</script>
 
 
 <footer class="footer">
@@ -416,50 +416,7 @@
 
 
 <!-- <!doctype html> -->
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>ModCube – Interactive 3‑D model</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- Safari needs this shim for import‑maps -->
-  <script async
-          src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
-
-  <!-- Tell every script that imports "three" to use the same CDN copy -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.min.js"
-    }
-  }
-  </script>
-
-  <!-- <model-viewer> without Three bundled -->
-  <script type="module"
-          src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js"></script>
-
-  <!-- Optional post‑processing add‑on -->
-  <script type="module"
-          src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script>
-
-  <style>
-    body{
-      margin:0;
-      font-family:system-ui,Arial,Helvetica,sans-serif;
-      background:#111;
-      display:grid;
-      place-items:center;
-      min-height:100vh;
-    }
-    model-viewer{
-      width:100%;
-      max-width:900px;
-      height:600px;
-      --progress-bar-color:#2ecc71; /* nice green loader */
-    }
-  </style>
-</head>
 <body>
 
   <!-- ===================== THE VIEWER ===================== -->
