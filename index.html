@@ -336,7 +336,7 @@
 
   /* ---------- Load the Collada model ---------- */
   const loader = new ColladaLoader();
-  loader.load('./static/models/modcube.dae', (collada) => {
+  loader.load('./static/model/modcube.dae', (collada) => {
       const model = collada.scene;
       model.scale.set(1, 1, 1);     // resize if necessary
       scene.add(model);
