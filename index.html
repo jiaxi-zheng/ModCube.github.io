@@ -222,12 +222,13 @@
         <div class="content has-text-justified">
           <p>
             This paper introduces a reconfigurable underwater robot system, RS-ModCubes, which allows scalable multi-robot configurations. 
-            An RS-ModCubes system comprises multiple ModCube modules, that can travel underwater with 6 DoFs and assemble with each other into a larger structure with onboard electromagnets. 
-            This system is designed to explore the feasibility of modularity and reconfigurability in underwater robotics, eliminating the need to customize mechanical designs for a specific task. 
-            We develop a modeling framework for reconfigurable robot systems, incorporating hydrodynamic effects via Monte Carlo approximation. 
-            A model-based feedforward Proportional Derivative (PD) controller serves as the baseline for control. Inspired by dexterous manipulation, we evaluated the robot's maximum task wrench 
-            space and power efficiency, compared against four commercial underwater robots. RS-ModCubes is validated via both real-world experiments and simulations, including individual and
-             multi-module trajectory tracking and hovering docking.
+            An RS-ModCubes system comprises multiple ModCube modules, that can travel underwater with 6 DoFs and assemble with each other 
+            into a larger structure with onboard electromagnets. This system is designed to explore the feasibility of modularity and 
+            reconfigurability in underwater robotics, eliminating the need to customize mechanical designs for a specific task. We develop 
+            a modeling framework for reconfigurable robot systems, incorporating hydrodynamic effects via Monte Carlo approximation. A model-based 
+            feedforward Proportional Derivative (PD) controller serves as the baseline for control. Inspired by dexterous manipulation, we evaluated 
+            the robot's maximum task wrench space and power efficiency, compared against four commercial underwater robots. RS-ModCubes is validated 
+            via both real-world experiments and simulations, including individual and multi-module trajectory tracking and hovering docking.
           </p>
         </div>
       </div>
@@ -286,7 +287,7 @@
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   // renderer.setSize(container.clientWidth, container.clientHeight);
-  renderer.setSize(1000, 1000);
+  renderer.setSize(600, 600);
   container.appendChild(renderer.domElement);
 
   /* Lighting */
