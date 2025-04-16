@@ -354,9 +354,6 @@
 </footer>
 
 
-
-
-<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>ModCube – Interactive 3‑D model</title>
@@ -401,24 +398,24 @@
   </style>
 </head>
   <!-- ===================== THE VIEWER ===================== -->
-  <model-viewer id="modcube"
-                src="./static/models/modcube.glb"   <!-- your GLB -->
-                ios-src="./static/models/modcube.usdz"  <!-- optional -->
-                alt="RS‑ModCube underwater robot"
-                camera-controls
-                auto-rotate
-                touch-action="pan-y"
-                ar
-                ar-modes="scene-viewer quick-look webxr"
-                ar-scale="fixed"
-                exposure="1.2">
+<model-viewer id="modcube"
+              src="./static/models/modcube.glb"   <!-- your GLB -->
+              ios-src="./static/models/modcube.usdz"  <!-- optional -->
+              alt="RS‑ModCube underwater robot"
+              camera-controls
+              auto-rotate
+              touch-action="pan-y"
+              ar
+              ar-modes="scene-viewer quick-look webxr"
+              ar-scale="fixed"
+              exposure="1.2">
 
-      <!-- Post‑processing: bloom + tonemapping -->
-      <effect-composer render-mode="quality" msaa="4">
-        <bloom-effect strength="0.7" radius="0.6" threshold="0.2"></bloom-effect>
-        <color-grade-effect></color-grade-effect>
-      </effect-composer>
-  </model-viewer>
+    <!-- Post‑processing: bloom + tonemapping -->
+    <effect-composer render-mode="quality" msaa="4">
+      <bloom-effect strength="0.7" radius="0.6" threshold="0.2"></bloom-effect>
+      <color-grade-effect></color-grade-effect>
+    </effect-composer>
+</model-viewer>
 
 
 
