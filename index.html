@@ -487,9 +487,14 @@
   </div>
 </section>
 
-<script>
+<script type="module">
+  // Import Three.js modules
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+  import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+  import { ColladaLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/ColladaLoader.js';
+
   // Wait for DOM to be ready
-  document.addEventListener('DOMContentLoaded', async () => {
+  document.addEventListener('DOMContentLoaded', () => {
     try {
       console.log('Starting 3D model initialization...');
       
@@ -499,17 +504,6 @@
         console.error('Model canvas container not found');
         return;
       }
-
-      // Dynamic import with error handling
-      const [
-        THREE,
-        { OrbitControls },
-        { ColladaLoader }
-      ] = await Promise.all([
-        import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js'),
-        import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js'),
-        import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/ColladaLoader.js')
-      ]);
 
       console.log('Three.js modules loaded successfully');
 
@@ -557,7 +551,7 @@
       controls.enableRotate = true;
       controls.enablePan = true;
 
-      // Create a simple cube as fallback/demo
+      // Create a more interesting demo cube
       const geometry = new THREE.BoxGeometry(1, 1, 1);
       const material = new THREE.MeshPhongMaterial({ 
         color: 0x4a90e2,
@@ -568,80 +562,90 @@
       cube.receiveShadow = true;
       scene.add(cube);
 
-      // Add rotating animation to cube
+      // Add some edges to make it look more interesting
+      const edges = new THREE.EdgesGeometry(geometry);
+      const lineMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+      const wireframe = new THREE.LineSegments(edges, lineMaterial);
+      cube.add(wireframe);
+
+      // Animation variables
       let rotationSpeed = 0.01;
       let isModelLoaded = false;
       
-      // Try to load the DAE model
-      const loader = new ColladaLoader();
-      
-      // Show loading indicator
-      const loadingIndicator = document.createElement('div');
-      loadingIndicator.style.position = 'absolute';
-      loadingIndicator.style.top = '50%';
-      loadingIndicator.style.left = '50%';
-      loadingIndicator.style.transform = 'translate(-50%, -50%)';
-      loadingIndicator.style.color = '#666';
-      loadingIndicator.style.fontSize = '14px';
-      loadingIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading 3D model...';
-      container.appendChild(loadingIndicator);
-      
-      loader.load(
-        './static/model/modcube.dae',
-        (collada) => {
-          console.log('DAE model loaded successfully');
-          // Remove loading indicator
-          if (loadingIndicator.parentNode) {
-            loadingIndicator.parentNode.removeChild(loadingIndicator);
+      // Try to load the DAE model (optional)
+      try {
+        const loader = new ColladaLoader();
+        
+        // Show loading indicator
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'model-loading';
+        loadingIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading 3D model...';
+        container.appendChild(loadingIndicator);
+        
+        loader.load(
+          './static/model/modcube.dae',
+          (collada) => {
+            console.log('DAE model loaded successfully');
+            // Remove loading indicator
+            if (loadingIndicator.parentNode) {
+              loadingIndicator.parentNode.removeChild(loadingIndicator);
+            }
+            
+            // Remove the placeholder cube
+            scene.remove(cube);
+            
+            const model = collada.scene;
+            model.scale.set(0.5, 0.5, 0.5);
+            model.position.set(0, 0, 0);
+            scene.add(model);
+            
+            // Center camera on model
+            const box = new THREE.Box3().setFromObject(model);
+            const size = box.getSize(new THREE.Vector3()).length();
+            const center = box.getCenter(new THREE.Vector3());
+            
+            controls.target.copy(center);
+            camera.position.copy(center).add(new THREE.Vector3(size, size, size));
+            controls.update();
+            
+            rotationSpeed = 0; // Stop cube rotation
+            isModelLoaded = true;
+          },
+          (progress) => {
+            if (progress.total > 0) {
+              const percentage = Math.round((progress.loaded / progress.total) * 100);
+              loadingIndicator.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Loading 3D model... ${percentage}%`;
+            }
+          },
+          (error) => {
+            console.warn('Could not load DAE model, using demo cube:', error);
+            // Remove loading indicator
+            if (loadingIndicator.parentNode) {
+              loadingIndicator.parentNode.removeChild(loadingIndicator);
+            }
+            
+            // Keep the cube as fallback and make it more colorful
+            cube.material.color.setHex(0x2ecc71); // Green color for demo
+            
+            // Add info message
+            const demoInfo = document.createElement('div');
+            demoInfo.style.position = 'absolute';
+            demoInfo.style.bottom = '10px';
+            demoInfo.style.left = '10px';
+            demoInfo.style.color = '#2ecc71';
+            demoInfo.style.fontSize = '12px';
+            demoInfo.style.backgroundColor = 'rgba(255,255,255,0.8)';
+            demoInfo.style.padding = '4px 8px';
+            demoInfo.style.borderRadius = '4px';
+            demoInfo.innerHTML = '<i class="fas fa-cube"></i> Demo cube - Model will load when available';
+            container.appendChild(demoInfo);
           }
-          
-          // Remove the placeholder cube
-          scene.remove(cube);
-          
-          const model = collada.scene;
-          model.scale.set(0.5, 0.5, 0.5);
-          model.position.set(0, 0, 0);
-          scene.add(model);
-          
-          // Center camera on model
-          const box = new THREE.Box3().setFromObject(model);
-          const size = box.getSize(new THREE.Vector3()).length();
-          const center = box.getCenter(new THREE.Vector3());
-          
-          controls.target.copy(center);
-          camera.position.copy(center).add(new THREE.Vector3(size, size, size));
-          controls.update();
-          
-          rotationSpeed = 0; // Stop cube rotation
-          isModelLoaded = true;
-        },
-        (progress) => {
-          if (progress.total > 0) {
-            const percentage = Math.round((progress.loaded / progress.total) * 100);
-            loadingIndicator.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Loading 3D model... ${percentage}%`;
-          }
-        },
-        (error) => {
-          console.warn('Could not load DAE model, using fallback cube:', error);
-          // Remove loading indicator
-          if (loadingIndicator.parentNode) {
-            loadingIndicator.parentNode.removeChild(loadingIndicator);
-          }
-          
-          // Keep the cube as fallback and make it more interesting
-          cube.material.color.setHex(0xe74c3c); // Red color to indicate fallback
-          
-          // Add some visual feedback
-          const fallbackInfo = document.createElement('div');
-          fallbackInfo.style.position = 'absolute';
-          fallbackInfo.style.bottom = '10px';
-          fallbackInfo.style.left = '10px';
-          fallbackInfo.style.color = '#e74c3c';
-          fallbackInfo.style.fontSize = '12px';
-          fallbackInfo.innerHTML = '<i class="fas fa-cube"></i> Fallback cube (model not found)';
-          container.appendChild(fallbackInfo);
-        }
-      );
+        );
+      } catch (loaderError) {
+        console.warn('Collada loader not available, using demo cube:', loaderError);
+        // Make the demo cube more colorful
+        cube.material.color.setHex(0x3498db);
+      }
 
       // Animation loop
       function animate() {
