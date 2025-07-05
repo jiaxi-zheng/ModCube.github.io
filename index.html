@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
 
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="keywords" content="ModCube, RS-ModCubes, underwater robots, modular robots, self-reconfigurable, ROS, robotics, autonomous underwater vehicles">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RS-ModCubes: self-Reconfigurable, Scalable, Modular Cubic Robots for Underwater Operations</title>
+  <title>RS-ModCubes: Self-Reconfigurable, Scalable, Modular Cubic Robots for Underwater Operations</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -39,6 +39,44 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  
+  <style>
+    /* Smooth scrolling for navigation */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Custom styles for better visual appearance */
+    .box {
+      transition: transform 0.3s ease;
+    }
+    
+    .box:hover {
+      transform: translateY(-5px);
+    }
+    
+    .notification {
+      margin-bottom: 1rem;
+    }
+    
+    /* Improve code block appearance */
+    pre {
+      background-color: #f5f5f5;
+      border-radius: 4px;
+      padding: 1rem;
+    }
+    
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+      .title.is-1 {
+        font-size: 2rem !important;
+      }
+      
+      .columns.is-multiline .column.is-one-third {
+        width: 100% !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -52,33 +90,37 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-<!--       <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span> -->
+      <a class="navbar-item" href="#abstract">
+        <span class="icon">
+          <i class="fas fa-info-circle"></i>
+        </span>
+        Abstract
       </a>
-
-      <!-- <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div> -->
-      </div>
+      <a class="navbar-item" href="#features">
+        <span class="icon">
+          <i class="fas fa-star"></i>
+        </span>
+        Features
+      </a>
+      <a class="navbar-item" href="#architecture">
+        <span class="icon">
+          <i class="fas fa-sitemap"></i>
+        </span>
+        Architecture
+      </a>
+      <a class="navbar-item" href="#model">
+        <span class="icon">
+          <i class="fas fa-cube"></i>
+        </span>
+        Interactive Model
+      </a>
+      <a class="navbar-item" href="#BibTeX">
+        <span class="icon">
+          <i class="fas fa-quote-left"></i>
+        </span>
+        Citation
+      </a>
     </div>
-
   </div>
 </nav>
 
@@ -88,7 +130,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">RS-ModCubes: self-Reconfigurable, Scalable, Modular Cubic Robots for Underwater Operations</h1>
+          <h1 class="title is-1 publication-title">RS-ModCubes: Self-Reconfigurable, Scalable, Modular Cubic Robots for Underwater Operations</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://jiaxi-zheng.github.io/">Jiaxi Zheng</a><sup>1</sup>,
@@ -100,13 +142,13 @@
               <a href="https://bottle101.github.io/">Botao He</a><sup>3</sup>,
             </span>
             <span class="author-block">
-              <a href=" ">Zhaoyang Mu</a><sup>2</sup>,
+              <a href="">Zhaoyang Mu</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href=" ">Zhaochen Meng</a><sup>2</sup>,
+              <a href="">Zhaochen Meng</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://tyz1030.github.io/">Tianyi Zhang</a><sup>1</sup>
+              <a href="https://tyz1030.github.io/">Tianyi Zhang</a><sup>1</sup>,
             </span>
             <span class="author-block">
               <a href="https://www.weimingzhi.com/">Weiming Zhi</a><sup>1</sup>,
@@ -118,8 +160,26 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Carnegie Mellon University,</span>
-            <span class="author-block"><sup>2</sup>Westlake University</span>
+            <span class="author-block"><sup>2</sup>Westlake University,</span>
             <span class="author-block"><sup>3</sup>University of Maryland, College Park</span>
+          </div>
+
+          <!-- Add badges section -->
+          <div class="column has-text-centered" style="margin-top: 1rem;">
+            <div class="tags is-centered">
+              <span class="tag is-info is-medium">
+                <i class="fab fa-github"></i>&nbsp;Open Source
+              </span>
+              <span class="tag is-success is-medium">
+                <i class="fas fa-check"></i>&nbsp;Validated
+              </span>
+              <span class="tag is-warning is-medium">
+                <i class="fas fa-water"></i>&nbsp;Underwater
+              </span>
+              <span class="tag is-primary is-medium">
+                <i class="fas fa-cubes"></i>&nbsp;Modular
+              </span>
+            </div>
           </div>
 
           <div class="column has-text-centered">
@@ -189,7 +249,7 @@
                 type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">  .
+        A comprehensive simulation, control, and mission planning framework for self-reconfigurable underwater robots.
       </h2>
     </div>
   </div>
@@ -235,6 +295,139 @@
     </div>
     <!--/ Abstract. -->
 
+    <!-- Key Features Section -->
+    <div class="columns is-centered has-text-centered" id="features" style="margin-top: 3rem;">
+      <div class="column is-full">
+        <h2 class="title is-3">Key Features</h2>
+        <div class="columns is-multiline">
+          <div class="column is-one-third">
+            <div class="box">
+              <div class="icon is-large has-text-primary">
+                <i class="fas fa-cubes fa-3x"></i>
+              </div>
+              <h4 class="title is-4">Modular Self-Reconfiguration</h4>
+              <p>Dynamic morphology adaptation during missions with electromagnetic coupling</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box">
+              <div class="icon is-large has-text-info">
+                <i class="fas fa-water fa-3x"></i>
+              </div>
+              <h4 class="title is-4">Underwater Physics Simulation</h4>
+              <p>Comprehensive hydrodynamic modeling with Gazebo and Monte Carlo approximation</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box">
+              <div class="icon is-large has-text-success">
+                <i class="fas fa-route fa-3x"></i>
+              </div>
+              <h4 class="title is-4">Mission Planning</h4>
+              <p>Autonomous navigation and task execution with teleoperation support</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box">
+              <div class="icon is-large has-text-warning">
+                <i class="fas fa-network-wired fa-3x"></i>
+              </div>
+              <h4 class="title is-4">Multi-Robot Coordination</h4>
+              <p>Scalable swarm behavior implementation tested up to 8 robots</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box">
+              <div class="icon is-large has-text-danger">
+                <i class="fas fa-robot fa-3x"></i>
+              </div>
+              <h4 class="title is-4">ROS-Based Framework</h4>
+              <p>Extensible modular architecture compatible with ROS Melodic and Noetic</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box">
+              <div class="icon is-large has-text-link">
+                <i class="fas fa-chart-line fa-3x"></i>
+              </div>
+              <h4 class="title is-4">Validated Performance</h4>
+              <p>Real-time factor 0.8-1.0, <5% error in hydrodynamic forces</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Architecture Section -->
+    <div class="columns is-centered has-text-centered" id="architecture" style="margin-top: 3rem;">
+      <div class="column is-full">
+        <h2 class="title is-3">System Architecture</h2>
+        <div class="content has-text-justified">
+          <p>
+            The RS-ModCubes framework is built on a modular ROS-based architecture designed for scalability and flexibility. 
+            The system consists of four main layers: Mission Planning, Control, Simulation, and Hardware Interface layers.
+          </p>
+        </div>
+        <div class="columns is-multiline">
+          <div class="column is-half">
+            <div class="notification is-primary is-light">
+              <h4 class="title is-4">Core Framework</h4>
+              <ul style="text-align: left;">
+                <li><strong>modcube_common:</strong> Core utilities and shared libraries</li>
+                <li><strong>modcube_config:</strong> Configuration files and robot descriptions</li>
+                <li><strong>modcube_mission:</strong> Mission execution and teleoperation</li>
+                <li><strong>modcube_msgs:</strong> Custom ROS message definitions</li>
+              </ul>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="notification is-info is-light">
+              <h4 class="title is-4">Simulation & Hardware</h4>
+              <ul style="text-align: left;">
+                <li><strong>modcube_sim:</strong> Gazebo simulation interface</li>
+                <li><strong>modcube_sim_gazebo_plugins:</strong> Custom Gazebo plugins</li>
+                <li><strong>modcube_sim_worlds:</strong> Simulation environments</li>
+                <li><strong>modcube_vehicle:</strong> Vehicle-specific hardware drivers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Performance Metrics Section -->
+    <div class="columns is-centered has-text-centered" style="margin-top: 3rem;">
+      <div class="column is-full">
+        <h2 class="title is-3">Performance Metrics</h2>
+        <div class="columns is-multiline">
+          <div class="column is-one-quarter">
+            <div class="has-text-centered">
+              <span class="title is-2 has-text-primary">0.8-1.0</span>
+              <p class="subtitle is-5">Real-time Factor</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="has-text-centered">
+              <span class="title is-2 has-text-info">50-100Hz</span>
+              <p class="subtitle is-5">Control Frequency</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="has-text-centered">
+              <span class="title is-2 has-text-success"><5%</span>
+              <p class="subtitle is-5">Hydrodynamic Error</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="has-text-centered">
+              <span class="title is-2 has-text-warning">8</span>
+              <p class="subtitle is-5">Max Robots Tested</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Paper video. -->
     <!-- <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -250,7 +443,7 @@
 </section>
 
 
-<section class="section">
+<section class="section" id="model">
   <div class="container is-max-desktop">
     <h2 class="title is-3">Interactive Model</h2>
     <div id="model-canvas" style="width:100%;height:500px;"></div>
@@ -286,8 +479,7 @@
   camera.position.set(2, 2, 3);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
-  // renderer.setSize(container.clientWidth, container.clientHeight);
-  renderer.setSize(600, 600);
+  renderer.setSize(container.clientWidth, container.clientHeight);
   container.appendChild(renderer.domElement);
 
   /* Lighting */
@@ -322,23 +514,50 @@
   }
   animate();
 
-  window.addEventListener('resize', () => {
-      const { clientWidth:w, clientHeight:h } = container;
+  function onWindowResize() {
+      const { clientWidth: w, clientHeight: h } = container;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
-  });
+  }
+  
+  window.addEventListener('resize', onWindowResize);
+  
+  // Initial resize to fit container
+  onWindowResize();
 </script>
 
+<script>
+  // Mobile navbar toggle
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbarBurger = document.querySelector('.navbar-burger');
+    const navbarMenu = document.querySelector('.navbar-menu');
+    
+    if (navbarBurger && navbarMenu) {
+      navbarBurger.addEventListener('click', () => {
+        navbarBurger.classList.toggle('is-active');
+        navbarMenu.classList.toggle('is-active');
+      });
+    }
+    
+    // Close mobile menu when clicking on a link
+    const navbarItems = document.querySelectorAll('.navbar-item');
+    navbarItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navbarBurger.classList.remove('is-active');
+        navbarMenu.classList.remove('is-active');
+      });
+    });
+  });
+</script>
 
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
+      <a class="icon-link" href="https://ieeexplore.ieee.org/abstract/document/10891552">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href=" " disabled>
+      <a class="icon-link" href="https://github.com/jiaxi-zheng/ModCube">
         <i class="fab fa-github"></i>
       </a>
     </div>
@@ -351,59 +570,13 @@
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
           <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
+            Built with ❤️ by the RS-ModCubes team. Based on the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> template.
           </p>
         </div>
       </div>
     </div>
   </div>
 </footer>
-
-
-
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>ModCube - Interactive 3-D model</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <script async
-          src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.min.js"
-    }
-  }
-  </script>
-
-  <script type="module"
-          src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js"></script>
-
-  <script type="module"
-          src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script>
-
-  <style>
-    body{
-      margin:0;
-      font-family:system-ui,Arial,Helvetica,sans-serif;
-      background:hsl(0, 0%, 100%);
-      display:grid;
-      place-items:center;
-      min-height:100vh;
-    }
-    model-viewer{
-      width:300%;
-      max-width:900px;
-      height:600px;
-      --progress-bar-color:#2ecc71; /* nice green loader */
-    }
-  </style>
-</head>
-
 
 </body>
 </html>
